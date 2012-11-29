@@ -56,7 +56,7 @@ namespace Yedis;
  * @see https://github.com/nrk/predis
  * @author Shiki
  */
-class Yedis extends CApplicationComponent
+class Yedis extends \CApplicationComponent
 {
   /**
    * Should point to <path>/predis/lib. If this is not given, the default path
@@ -112,7 +112,7 @@ class Yedis extends CApplicationComponent
     // make sure Yii can autoload Predis\\Client
     if (!class_exists('Predis\\Client', false)) {
       $path = rtrim($this->predisLibPath, '/') . '/lib/Predis';
-      Yii::setPathOfAlias('Predis', $path);
+      \Yii::setPathOfAlias('Predis', $path);
     }
 
     if (!is_array($this->clients))
@@ -146,14 +146,14 @@ class Yedis extends CApplicationComponent
    */
   public function createClient($key = 'default')
   {
-    if ($name == 'default' && !isset($this->clients[$name]))
-      return new Predis\Client();
+    if ($key == 'default' && !isset($this->clients[$key]))
+      return new \Predis\Client();
 
     $config = $this->clients[$key];
 
     $params  = isset($config['params']) ? $config['params'] : null;
     $options = isset($config['config']) ? $config['config'] : null;
 
-    return new Predis\Client($params, $options);
+    return new \Predis\Client($params, $options);
   }
 }
