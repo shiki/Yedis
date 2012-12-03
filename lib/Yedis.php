@@ -4,7 +4,7 @@ namespace Yedis;
 
 /**
  * Wraps {@link https://github.com/nrk/predis | Predis} in a Yii extension so it can easily be accessed
- * from a Yii component (e.g. `Yii::app()->yedis->client()`).
+ * from a Yii component (e.g. `Yii::app()->yedis->getClient()`).
  *
  * This also allows Predis configurations to be set up in the Yii config files and then easily create
  * Predis clients using those configurations anywhere.
@@ -59,8 +59,7 @@ namespace Yedis;
 class Yedis extends \CApplicationComponent
 {
   /**
-   * Should point to <path>/predis/lib. If this is not given, the default path
-   * inside the extension will be used.
+   * Should point to the root folder of the Predis library files.
    *
    * @var string
    */
