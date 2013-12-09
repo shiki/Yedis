@@ -108,16 +108,17 @@ class Yedis extends \CApplicationComponent
    */
   public function init()
   {
-    // make sure Yii can autoload Predis\\Client
-    if (!class_exists('Predis\\Client', false)) {
-      $path = rtrim($this->predisLibPath, '/') . '/lib/Predis';
-      \Yii::setPathOfAlias('Predis', $path);
-    }
+    parent::init();
 
     if (!is_array($this->clients))
       $this->clients = array();
 
-    parent::init();
+    if (!$this->predisLibPath || class_exists('Predis\\Client', false))
+      return;
+
+    // make sure Yii can autoload Predis\\Client
+    $path = rtrim($this->predisLibPath, '/') . '/lib/Predis';
+    \Yii::setPathOfAlias('Predis', $path);
   }
 
   /**
