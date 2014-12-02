@@ -130,7 +130,7 @@ class Yedis extends \CApplicationComponent
    *
    * @param string $key The client configuration key that can be found in {@link $clients}.
    *
-   * @return Predis\Client
+   * @return \Predis\Client
    */
   public function getClient($key = 'default')
   {
@@ -148,7 +148,7 @@ class Yedis extends \CApplicationComponent
    *
    * @param string $key The client configuration key that can be found in {@link $clients}.
    *
-   * @return Predis\Client
+   * @return \Predis\Client
    */
   public function createClient($key = 'default')
   {
