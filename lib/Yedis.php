@@ -110,11 +110,13 @@ class Yedis extends \CApplicationComponent
   {
     parent::init();
 
-    if (!is_array($this->clients))
+    if (!is_array($this->clients)) {
       $this->clients = array();
+    }
 
-    if (!$this->predisLibPath || class_exists('Predis\\Client', false))
+    if (!$this->predisLibPath || class_exists('Predis\\Client', false)) {
       return;
+    }
 
     // make sure Yii can autoload Predis\\Client
     $path = rtrim($this->predisLibPath, '/') . '/lib/Predis';
@@ -127,14 +129,17 @@ class Yedis extends \CApplicationComponent
    * will return the already created client.
    *
    * @param string $key The client configuration key that can be found in {@link $clients}.
+   *
    * @return Predis\Client
    */
   public function getClient($key = 'default')
   {
-    if (isset($this->_clientInstances[$key]))
+    if (isset($this->_clientInstances[$key])) {
       return $this->_clientInstances[$key];
+    }
 
     $this->_clientInstances[$key] = $this->createClient($key);
+
     return $this->_clientInstances[$key];
   }
 
@@ -142,12 +147,14 @@ class Yedis extends \CApplicationComponent
    * Create an instance of `Predis\Client` using the configuration pointed to by `$key`.
    *
    * @param string $key The client configuration key that can be found in {@link $clients}.
+   *
    * @return Predis\Client
    */
   public function createClient($key = 'default')
   {
-    if ($key == 'default' && !isset($this->clients[$key]))
+    if ($key == 'default' && !isset($this->clients[$key])) {
       return new \Predis\Client();
+    }
 
     $config = $this->clients[$key];
 
